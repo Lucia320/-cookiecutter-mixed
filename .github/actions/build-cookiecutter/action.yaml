@@ -43,14 +43,14 @@ runs:
       shell: bash
       working-directory: ${{ inputs.working_directory }}
       run: |
-        echo "============ ${{ inputs.repo_name }} ================"
+        echo "============ ${{ inputs.repo_name }} IS MAIN ${{ inputs.is_main }} ================"
         echo "build 'repo_name' ${{ inputs.repo_name }} and template  ${{ inputs.template }}"
         if [[ ! ${{ inputs.is_main }} ]]; then
           find ./ -maxdepth 1 \
             ! -name '${{ inputs.repo_name }}' \
             ! -name '.' \
             ! -exec rm -rf {} +
-          echo "==TEMPLATE====== ${{ inputs.template }} ================"
+          echo "==MAIN====== ${{ inputs.template }} ================"
           echo "Ruta de la creacion en main"
           pwd
           cookiecutter --no-input --output-dir ./${{ inputs.repo_name }} ${{ inputs.template }}
@@ -58,7 +58,7 @@ runs:
           ls
           echo "================================="
         else
-         echo "==TEMPLATE====== ${{ inputs.template }} ================"
+         echo "==DEPENDENCY====== ${{ inputs.template }} ================"
           echo "build dependency ${{ inputs.template }}"
           find ./ -maxdepth 1 \
             ! -name 'build-${{ inputs.template }}' \
