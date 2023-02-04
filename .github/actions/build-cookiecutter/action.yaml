@@ -49,7 +49,7 @@ runs:
             ! -name 'cookiecutter-${{ inputs.repo_name }}' \
             ! -name '.' \
             ! -exec rm -rf {} +
-          cd ${{ inpute.template }}
+          cd ${{ inputs.template }}
           cookiecutter . --no-input --output-dir ./cookiecutter-${{ inputs.repo_name }}
         else
           echo "build dependency ${{ inputs.template }}"
