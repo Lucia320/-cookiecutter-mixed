@@ -53,7 +53,7 @@ runs:
           echo "==MAIN====== ${{ inputs.template }} ================"
           echo "Ruta de la creacion en main"
           pwd
-          cookiecutter --no-input --output-dir ./${{ inputs.repo_name }} ${{ inputs.template }}
+          cookiecutter --no-input --output-dir ./${{ inputs.repo_name }} /home/runner/work/-cookiecutter-mixed/-cookiecutter-mixed/${{ inputs.template }}
           echo "Archivos generados en main"
           ls
           echo "================================="
