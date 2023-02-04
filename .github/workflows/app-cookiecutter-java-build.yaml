@@ -19,8 +19,10 @@ jobs:
           template: cookiecutter-java
           working_directory: .
   
-      - name: Build cookiecutter - ruby
+      - name: Checkout repository
         uses: actions/checkout@v2
+
+      - name: Build cookiecutter - ruby
         uses: ./.github/actions/build-cookiecutter
         with:
           is_main: false 
