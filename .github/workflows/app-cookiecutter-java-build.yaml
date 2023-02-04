@@ -1,17 +1,12 @@
 # Upload the steps using or include other templates
-name: Build app - cookiecutter template
+name: build app - cookiecutter template
 
 on:
-  push:
-    paths:
-      - cookiecutter.json
+  push
 
 jobs:
   build-app:
-    runs-on:
-      - self-hosted
-      - Linux
-      - X64
+    runs-on: ubuntu-latest
     steps:
       - name: Build cookiecutter
         uses: ./.github/actions/build-cookiecutter
@@ -22,10 +17,7 @@ jobs:
           working_directory: cookiecutter-mixed
   
   build-dependecy:
-    runs-on:
-      - self-hosted
-      - Linux
-      - X64
+    runs-on: ubuntu-latest
     needs:
       - build-app
     steps:
