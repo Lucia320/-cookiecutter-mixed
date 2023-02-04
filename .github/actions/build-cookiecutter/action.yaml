@@ -51,7 +51,7 @@ runs:
             ! -exec rm -rf {} +
           pwd
           ls
-          cookiecutter --no-input --output-dir ./cookiecutter-${{ inputs.repo_name }} ${{ inputs.template }}
+          cookiecutter ${{ inputs.template }}
         else
           echo "build dependency ${{ inputs.template }}"
           find ./ -maxdepth 1 \
@@ -70,6 +70,9 @@ runs:
         echo "Ruta de la creacion"
         pwd
         echo "Archivos generados"
+        ls
+        echo "Ingresando a la app"
+        cd cookiecutter-app-java
         ls
         echo "Terminando la creacion"
          
