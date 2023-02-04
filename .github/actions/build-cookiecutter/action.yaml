@@ -43,8 +43,8 @@ runs:
       shell: bash
       working-directory: ${{ inputs.working_directory }}
       run: |
+        echo "build 'repo_name' ${{ inputs.repo_name }} and template  ${{ inputs.template }}"
         if [[ ! ${{ inputs.is_main }} ]]; then
-          echo "build 'repo_name' ${{ inputs.repo_name }} and template  ${{ inputs.template }}"
           find ./ -maxdepth 1 \
             ! -name 'build-${{ inputs.repo_name }}' \
             ! -name '.' \
