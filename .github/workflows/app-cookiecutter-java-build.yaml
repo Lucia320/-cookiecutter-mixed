@@ -17,7 +17,7 @@ jobs:
           is_main: true 
           repo_name: app-java
           template: cookiecutter-java
-          working_directory: cookiecutter-mixed
+          working_directory: .
   
   build-dependecy:
     runs-on: ubuntu-latest
