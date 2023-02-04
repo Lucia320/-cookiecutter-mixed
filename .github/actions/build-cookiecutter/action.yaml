@@ -46,22 +46,22 @@ runs:
         if [[ ! ${{ inputs.is_main }} ]]; then
           echo "build 'repo_name' ${{ inputs.repo_name }} and template  ${{ inputs.template }}"
           find ./ -maxdepth 1 \
-            ! -name 'cookiecutter-${{ inputs.repo_name }}' \
+            ! -name 'build-${{ inputs.repo_name }}' \
             ! -name '.' \
             ! -exec rm -rf {} +
           pwd
           ls
-          cookiecutter ${{ inputs.template }}
+          cookiecutter --no-input --output-dir ./build-${{ inputs.repo_name }} ${{ inputs.template }}
         else
           echo "build dependency ${{ inputs.template }}"
           find ./ -maxdepth 1 \
-            ! -name '${{ inputs.template }}' \
+            ! -name 'build-${{ inputs.template }}' \
             ! -name '.' \
             ! -exec rm -rf {} +
           pwd
           ls
-          cookiecutter --no-input --output-dir ./${{ inputs.template }} ${{ inputs.template }}
-          cp -R ./${{ inputs.template }} ./cookiecutter-${{ inputs.repo_name }}
+          cookiecutter --no-input --output-dir ./build-${{ inputs.template }} ${{ inputs.template }}
+          cp -R ./build-${{ inputs.template }} ./build-${{ inputs.repo_name }}
         fi
     - name: Notification cookiecutter 
       shell: bash
