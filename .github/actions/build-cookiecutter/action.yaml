@@ -45,7 +45,7 @@ runs:
       run: |
         echo "============ ${{ inputs.repo_name }} IS MAIN ${{ inputs.is_main }} ================"
         echo "build 'repo_name' ${{ inputs.repo_name }} and template  ${{ inputs.template }}"
-        if [[ ! ${{ inputs.is_main }} ]]; then
+        if [[ ${{ inputs.is_main }} ]]; then
           find ./ -maxdepth 1 \
             ! -name '${{ inputs.repo_name }}' \
             ! -name '.' \
