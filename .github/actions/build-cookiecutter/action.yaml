@@ -49,7 +49,7 @@ runs:
             ! -name 'cookiecutter-${{ inputs.repo_name }}' \
             ! -name '.' \
             ! -exec rm -rf {} +
-          cd ${{ inputs.template }}
+          cd ${{ inputs.working_directory }}/${{ inputs.template }}
           cookiecutter . --no-input --output-dir ./cookiecutter-${{ inputs.repo_name }}
         else
           echo "build dependency ${{ inputs.template }}"
@@ -57,7 +57,7 @@ runs:
             ! -name 'cookiecutter-${{ inputs.template }}' \
             ! -name '.' \
             ! -exec rm -rf {} +
-          cd ${{ inputs.template }}
+          cd ${{ inputs.working_directory }}/${{ inputs.template }}
           cookiecutter . --no-input --output-dir ./cookiecutter-${{ inputs.template }}
           cp -R ./cookiecutter-${{ inputs.template }} ./cookiecutter-${{ inputs.repo_name }}
         fi
