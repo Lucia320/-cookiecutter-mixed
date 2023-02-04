@@ -56,13 +56,13 @@ runs:
         else
           echo "build dependency ${{ inputs.template }}"
           find ./ -maxdepth 1 \
-            ! -name 'cookiecutter-${{ inputs.template }}' \
+            ! -name '${{ inputs.template }}' \
             ! -name '.' \
             ! -exec rm -rf {} +
           pwd
           ls
           cd ${{ inputs.template }}
-          cookiecutter . --no-input --output-dir ./cookiecutter-${{ inputs.template }}
-          cp -R ./cookiecutter-${{ inputs.template }} ./cookiecutter-${{ inputs.repo_name }}
+          cookiecutter . --no-input --output-dir ./${{ inputs.template }}
+          cp -R ./${{ inputs.template }} ./cookiecutter-${{ inputs.repo_name }}
         fi
          
