@@ -64,9 +64,9 @@ runs:
           cp -R ./${{ inputs.template }} ./cookiecutter-${{ inputs.repo_name }}
         fi
     - name: Notification cookiecutter 
-        shell: bash
-        working-directory: .
-        run: |
-          ls
-          echo "Terminando la creacion"
+      shell: bash
+      working-directory: .
+      run: |
+        ls
+        echo "Terminando la creacion"
          
