@@ -44,7 +44,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Build cookiecutter - ruby
+      - name: Notification cookiecutter 
         shell: bash
         working-directory: .
         run: |
