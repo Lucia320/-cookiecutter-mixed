@@ -50,6 +50,7 @@ runs:
             ! -name '.' \
             ! -exec rm -rf {} +
           pwd
+          ls
           cd ${{ inputs.template }}
           cookiecutter . --no-input --output-dir ./cookiecutter-${{ inputs.repo_name }}
         else
@@ -59,6 +60,7 @@ runs:
             ! -name '.' \
             ! -exec rm -rf {} +
           pwd
+          ls
           cd ${{ inputs.template }}
           cookiecutter . --no-input --output-dir ./cookiecutter-${{ inputs.template }}
           cp -R ./cookiecutter-${{ inputs.template }} ./cookiecutter-${{ inputs.repo_name }}
