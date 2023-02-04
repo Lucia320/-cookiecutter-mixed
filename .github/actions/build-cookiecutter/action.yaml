@@ -52,7 +52,7 @@ runs:
           pwd
           ls
           cd ${{ inputs.template }}
-          cookiecutter . --no-input --output-dir ./cookiecutter-${{ inputs.repo_name }}
+          cookiecutter --no-input --output-dir ./cookiecutter-${{ inputs.repo_name }}
         else
           echo "build dependency ${{ inputs.template }}"
           find ./ -maxdepth 1 \
@@ -62,7 +62,7 @@ runs:
           pwd
           ls
           cd ${{ inputs.template }}
-          cookiecutter . --no-input --output-dir ./${{ inputs.template }}
+          cookiecutter --no-input --output-dir ./${{ inputs.template }}
           cp -R ./${{ inputs.template }} ./cookiecutter-${{ inputs.repo_name }}
         fi
          
