@@ -1,0 +1,5 @@
+default_context:
+    repo_name: app_java
+    app_name: MyAppJava
+    author: "Lucia Valencia"
+    email: "lvalencia"

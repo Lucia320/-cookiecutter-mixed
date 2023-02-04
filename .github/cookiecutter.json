@@ -1,0 +1,7 @@
+{
+    "app_name": "app_name",
+    "project_slug": "{{ cookiecutter.app_name.lower().replace(' ', '_').replace('-', '_') }}",
+    "host_port": "8888",
+    "project_description": "Please Input a short description",
+    "formatter_type": ["black", "autopep8", "yapf"]
+}

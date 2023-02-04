@@ -1,17 +1,14 @@
-cookiecutter-mvn
+cookiecutter java with mvn
 ========================
-Steps
---------
-cookiecutter cookiecutter-ruby
-
+ 
 Requires
 --------
-
+* Docker
 * Python
 * Cookiecutter `brew install cookiecutter` or `pip install cookiecutter`
-* JDK 11+
 
-Use cookiecutter
-----------------------------
 
-cookiecutter url_repo
+Steps
+--------
+1. update file cookiecutter-config.yaml
+2. run workflow app-cookiecutter-java-build

@@ -14,31 +14,40 @@ jobs:
       - name: Build cookiecutter
         uses: ./.github/actions/build-cookiecutter
         with:
-          is_main: true
-          app_name: MyAppJava
+          is_main: true 
+          repo_name: app-java
           template: cookiecutter-java
-          working_directory: ./
+          working_directory: .
   
+  build-dependecy:
+    runs-on: ubuntu-latest
+    needs:
+      - build-app
+    steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
       - name: Build cookiecutter - ruby
         uses: ./.github/actions/build-cookiecutter
         with:
-          app_name: MyAppJava
+          is_main: false 
+          repo_name: app-java
           template: cookiecutter-ruby
-          working_directory: ./
+          working_directory: .
+
+  build-notification:
+    runs-on: ubuntu-latest
+    needs:
+      - build-app
+      - build-dependecy
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
       - name: Notification cookiecutter 
         shell: bash
-        working-directory: ./
+        working-directory: .
         run: |
-          echo "Ruta de la creacion"
-          pwd
-          echo "Archivos generados"
-          ls
-          echo "Ingresamdo a la app"
-          cd cookiecutter-app-java
           ls
           echo "Terminando la creacion"
   

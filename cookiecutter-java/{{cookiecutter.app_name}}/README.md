@@ -1,12 +1,11 @@
-# {{cookiecutter.project_name}}
-{{cookiecutter.app_name}}
+# {{cookiecutter.app_name}}
 
 # Requirements
 
 * JDK version 17+
 
 # Create template
-  cookiecutter cookiecutter-spring-boot-mvn 
+  cookiecutter cookiecutter 
  
 # Run microservice
   docker build -t cookiecutters/java . 

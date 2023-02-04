@@ -19,9 +19,9 @@ author: Lucia Valencia
 inputs:
   is_main:
     description: "The build is the main cookiecutter"
-    required: true
-  repo_name:
-    description: "The name of the repo_name, for example 'infraestructure'"
+    required: false
+  app_name:
+    description: "The name of the main app_name '{{ cookiecutter.app_name }}"
     required: true
   template:
     description: "The name of the template, for example 'infraestructure'"
@@ -43,36 +43,35 @@ runs:
       shell: bash
       working-directory: ${{ inputs.working_directory }}
       run: |
-        echo "============ ${{ inputs.repo_name }} IS MAIN ${{ inputs.is_main }} ================"
-        echo "build 'repo_name' ${{ inputs.repo_name }} and template  ${{ inputs.template }}"
-        if [[ ${{ inputs.is_main }} ]]; then
-          find ./ -maxdepth 1 \
-            ! -name '${{ inputs.repo_name }}' \
-            ! -name '.' \
-            ! -exec rm -rf {} +
-          echo "==MAIN====== ${{ inputs.template }} ================"
-          echo "Ruta de la creacion en main"
+        if ${{ inputs.is_main }} ; then
+          echo "INFO init build Template> ${{ inputs.template}} "
+          echo "INFO main folder>"
+          rm -rf ${{ inputs.working_directory}}/build
           pwd
-          cookiecutter . --no-input --output-dir ./${{ inputs.repo_name }} /home/runner/work/-cookiecutter-mixed/-cookiecutter-mixed/${{ inputs.template }}
-          echo "Archivos generados en main"
+          echo "INFO execute cookiecutter --config-file /cookiecutter/cookiecutter-config.yaml --no-input --output-dir ${{ inputs.working_directory}}/build ${{ inputs.working_directory}}/${{ inputs.template}}"
+          cookiecutter --config-file /cookiecutter/cookiecutter-config.yaml --no-input --output-dir ${{ inputs.working_directory}}/build ${{ inputs.working_directory}}/${{ inputs.template}}
+          echo "cookiecutter --config-file /cookiecutter/cookiecutter-config.yaml  --no-input --output-dir build ${{ inputs.working_directory}}/cookiecutter-java"
+          echo "INFO The folder was generated in folder build"
           ls
+          echo "INFO The process is finish"
+      else
+          echo "INFO init build Template> ${{ inputs.template}} "
+          echo "INFO dependency folder>"
+          echo "INFO build dependency ${{ inputs.template}}"
+          rm -rf ${{ inputs.working_directory}}/build/dependency
           echo "================================="
-        else
-         echo "==DEPENDENCY====== ${{ inputs.template }} ================"
-          echo "build dependency ${{ inputs.template }}"
-          find ./ -maxdepth 1 \
-            ! -name 'build-${{ inputs.template }}' \
-            ! -name '.' \
-            ! -exec rm -rf {} +
-          echo "================================="
-          echo "Ruta de la creacion en dependency"
+          echo "INFO files dependency"
           pwd
-          cookiecutter --no-input --output-dir ./build-${{ inputs.template }} ${{ inputs.template }}
-          echo "Archivos generados en dependency"
+          echo "INFO execute cookiecutter --config-file /cookiecutter/cookiecutter-config.yaml --no-input --output-dir ${{ inputs.working_directory}}/build/dependency ${{ inputs.working_directory}}/${{ inputs.template}}"
+          cookiecutter --config-file /cookiecutter/cookiecutter-config.yaml  --no-input --output-dir ${{ inputs.working_directory}}/build/dependency ${{ inputs.working_directory}}/${{ inputs.template}}
+          echo "cookiecutter --config-file /cookiecutter/cookiecutter-config.yaml  --no-input --output-dir ${{ inputs.working_directory}}/build/dependency ${{ inputs.working_directory}}/${{ inputs.template}}"
+          echo "INFO The folder was generated in folder build/dependency"
           ls
-          cp -R ./build-${{ inputs.template }} ./${{ inputs.repo_name }}
+          echo "INFO copy cp -R ${{ inputs.working_directory}}/build/dependency/${{ inputs.app_name}} ${{ inputs.working_directory}}/build/${{ inputs.app_name}}"
+          cp -R ${{ inputs.working_directory}}/build/dependency/${{ inputs.app_name}} ${{ inputs.working_directory}}/build
           echo "================================="
-        fi
+      fi
+
     - name: Notification cookiecutter 
       shell: bash
       working-directory: .
@@ -82,7 +81,7 @@ runs:
         echo "Archivos generados"
         ls
         echo "Ingresando a la app"
-        cd ${{ inputs.repo_name }}
+        cd ${{ inputs.app_name }}
         ls
         echo "Terminando la creacion"
          

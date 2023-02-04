@@ -1,4 +1,6 @@
 {
-	"project_name": "Ruby Empty",
-	"app_name": "ruby"
+	"app_name": "AppRuby",
+	"project_slug": "company",
+	"project_description": "Ruby Empty"
+	
 }
