@@ -43,7 +43,7 @@ runs:
       shell: bash
       working-directory: ${{ inputs.working_directory }}
       run: |
-          if [[ ! ${{ inputs.is_main }} ]]; then
+        if [[ ! ${{ inputs.is_main }} ]]; then
           echo "build 'repo_name' ${{ inputs.repo_name }} and template  ${{ inputs.template }}"
           find ./ -maxdepth 1 \
             ! -name 'cookiecutter-${{ inputs.repo_name }}' \
