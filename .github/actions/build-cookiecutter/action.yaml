@@ -76,7 +76,7 @@ runs:
         echo "Archivos generados"
         ls
         echo "Ingresando a la app"
-        cd cookiecutter-app-java
+        cd ${{ inputs.repo_name }}
         ls
         echo "Terminando la creacion"
          
