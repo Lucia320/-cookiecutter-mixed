@@ -1,5 +1,5 @@
 # Upload the steps using or include other templates
-name: build app - cookiecutter template
+name: Build app - cookiecutter template
 
 on:
   push:
@@ -22,7 +22,10 @@ jobs:
           working_directory: cookiecutter-mixed
   
   build-dependecy:
-    runs-on: ubuntu-latest
+    runs-on:
+      - self-hosted
+      - Linux
+      - X64
     needs:
       - build-app
     steps:
