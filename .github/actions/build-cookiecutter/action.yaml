@@ -49,9 +49,9 @@ runs:
             ! -name '${{ inputs.repo_name }}' \
             ! -name '.' \
             ! -exec rm -rf {} +
-          echo "Ruta de la creacion"
+          echo "Ruta de la creacion en main"
           pwd
-          echo "Archivos generados"
+          echo "Archivos generados en main"
           ls
           cookiecutter --no-input --output-dir ./${{ inputs.repo_name }} ${{ inputs.template }}
         else
@@ -60,9 +60,9 @@ runs:
             ! -name 'build-${{ inputs.template }}' \
             ! -name '.' \
             ! -exec rm -rf {} +
-          echo "Ruta de la creacion"
+          echo "Ruta de la creacion en main"
           pwd
-          echo "Archivos generados"
+          echo "Archivos generados en dependency"
           ls
           cookiecutter --no-input --output-dir ./build-${{ inputs.template }} ${{ inputs.template }}
           cp -R ./build-${{ inputs.template }} ./${{ inputs.repo_name }}
