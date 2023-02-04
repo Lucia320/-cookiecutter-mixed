@@ -51,7 +51,7 @@ runs:
             ! -exec rm -rf {} +
           pwd
           ls
-          cookiecutter --no-input --output-dir ./cookiecutter-${{ inputs.repo_name }} ${{ inputs.template }}"
+          cookiecutter --no-input --output-dir ./cookiecutter-${{ inputs.repo_name }} ${{ inputs.template }}
         else
           echo "build dependency ${{ inputs.template }}"
           find ./ -maxdepth 1 \
@@ -60,8 +60,7 @@ runs:
             ! -exec rm -rf {} +
           pwd
           ls
-          cd ${{ inputs.template }}
-          cookiecutter . --no-input --output-dir ./${{ inputs.template }}
+          cookiecutter --no-input --output-dir ./${{ inputs.template }} ${{ inputs.template }}
           cp -R ./${{ inputs.template }} ./cookiecutter-${{ inputs.repo_name }}
         fi
          
