@@ -49,7 +49,9 @@ runs:
             ! -name '${{ inputs.repo_name }}' \
             ! -name '.' \
             ! -exec rm -rf {} +
+          echo "Ruta de la creacion"
           pwd
+          echo "Archivos generados"
           ls
           cookiecutter --no-input --output-dir ./${{ inputs.repo_name }} ${{ inputs.template }}
         else
@@ -58,7 +60,9 @@ runs:
             ! -name 'build-${{ inputs.template }}' \
             ! -name '.' \
             ! -exec rm -rf {} +
+          echo "Ruta de la creacion"
           pwd
+          echo "Archivos generados"
           ls
           cookiecutter --no-input --output-dir ./build-${{ inputs.template }} ${{ inputs.template }}
           cp -R ./build-${{ inputs.template }} ./${{ inputs.repo_name }}
