@@ -24,6 +24,9 @@ jobs:
     needs:
       - build-app
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
       - name: Build cookiecutter - ruby
         uses: ./.github/actions/build-cookiecutter
         with:
