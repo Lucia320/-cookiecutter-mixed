@@ -34,6 +34,12 @@ jobs:
         shell: bash
         working-directory: .
         run: |
+          echo "Ruta de la creacion"
+          pwd
+          echo "Archivos generados"
+          ls
+          echo "Ingresamdo a la app"
+          cd cookiecutter-app-java
           ls
           echo "Terminando la creacion"
   
