@@ -1,0 +1,64 @@
+
+# cookiecutter is command-line utility to create projects from templates
+# https://github.com/cookiecutter/cookiecutter
+#
+# --no-input      Do not prompt for parameters and only use
+#                 cookiecutter.json file content
+#
+# --output-dir    Where to output the generated project dir into
+# - name: Install dependencies
+#   run: pip install cookiecutter
+# - name: Setup tools
+#   uses: ./.github/actions/tools
+# Pending to create folder build
+
+name: "build-cookiecuter"
+description: "Run the cookiecutter commands"
+author: Lucia Valencia
+
+inputs:
+  is_main:
+    description: "The build is the main cookiecutter"
+    required: true
+  repo_name:
+    description: "The name of the repo_name, for example 'infraestructure'"
+    required: true
+  template:
+    description: "The name of the template, for example 'infraestructure'"
+    required: true
+  working_directory:
+    description: Main folder `cookiecutter build folder`
+    required: false
+
+runs:
+  using: composite
+  steps:
+    - name: Install requirements
+      shell: bash
+      working-directory: ${{ inputs.working_directory }}
+      run: |
+        pip3 install -r requirements.txt
+
+    - name: Build using template
+        shell: bash
+        working-directory: ${{ inputs.working_directory }}
+        run: |
+           if [[ ! ${{ inputs.is_main }} ]]; then
+            echo "build 'repo_name' ${{ inputs.repo_name }} and template  ${{ inputs.template }}"
+            find ./ -maxdepth 1 \
+              ! -name 'cookiecutter-${{ inputs.repo_name }}' \
+              ! -name '.' \
+              ! -exec rm -rf {} +
+            cd ${{ inpute.template }}
+            cookiecutter . --no-input --output-dir ./cookiecutter-${{ inputs.repo_name }}
+          else
+            echo "build dependency ${{ inputs.template }}"
+            find ./ -maxdepth 1 \
+              ! -name 'cookiecutter-${{ inputs.template }}' \
+              ! -name '.' \
+              ! -exec rm -rf {} +
+            cd ${{ inpute.template }}
+            cookiecutter . --no-input --output-dir ./cookiecutter-${{ inputs.template }}
+            cp -R ./cookiecutter-${{ inputs.template }} ./cookiecutter-${{ inputs.repo_name }}
+          fi
+         

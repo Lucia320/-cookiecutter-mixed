@@ -1,0 +1,39 @@
+# Upload the steps using or include other templates
+name: Build ruby app from cookiecutter template
+
+on:
+  push:
+    paths:
+      - cookiecutter.json
+
+jobs:
+  build-app:
+    runs-on:
+      - self-hosted
+      - Linux
+      - X64
+    steps:
+      - name: Build cookiecutter
+        uses: ./.github/actions/build-cookiecutter
+        with:
+          is_main: true 
+          repo_name: app-java
+          template: cookiecutter-java
+          working_directory: cookiecutter-mixed
+  
+  build-dependecy:
+    runs-on: ubuntu-latest
+    needs:
+      - prepare-directory
+      - build-app
+    steps:
+      - name: Build cookiecutter - ruby
+        uses: ./.github/actions/build-cookiecutter
+        with:
+          is_main: false 
+          repo_name: app-java
+          template: cookiecutter-ruby
+  
+  # create-repo:
+  #  pending step PR
+ 

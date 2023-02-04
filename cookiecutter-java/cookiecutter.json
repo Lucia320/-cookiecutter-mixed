@@ -1,0 +1,6 @@
+{
+	"project_name": "Simple Spring Boot App",
+	"app_name": "simpleapp",
+	"server_port": 8080,
+	"_copy_without_render": [".mvn", "mvnw/", "*mvnw", "*mvnw.cmd"]
+}
