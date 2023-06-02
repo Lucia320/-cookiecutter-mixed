@@ -17,10 +17,10 @@ jobs:
       #    sudo apt-get install docker-compose -y
 
       - name: build golden db
-        run: docker build --name goldendb -t goldendb:latest .
+        run: docker build -t goldendb:latest .
 
       - name: Iniciar contenedor de postgres
-        run: docker run -d -p 5432:5432 goldendb:latest
+        run: docker run --name goldendb  -d -p 5432:5432 goldendb:latest
 
       - name: Verificar el contenedor
         run: docker exec -it  
