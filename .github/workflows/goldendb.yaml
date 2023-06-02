@@ -1,0 +1,23 @@
+# Upload the steps using or include other templates
+name: build and use goldendb image
+
+on:
+  push
+
+jobs:
+  build-app:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      #- name: prepare docker
+      #  run: |
+      #    sudo apt-get update
+      #    sudo apt-get install docker-compose -y
+
+      - name: build golden db
+        run: docker build -t goldendb:latest .
+
+      - name: Iniciar contenedor de postgres
+        run: docker run -d -p 5432:5432 goldendb:latest
