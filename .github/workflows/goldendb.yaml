@@ -24,5 +24,4 @@ jobs:
 
       - name: Verificar el contenedor
         run: |
-          docker exec goldendb -it sh
-          psql -U postgres
+          docker ps -a
